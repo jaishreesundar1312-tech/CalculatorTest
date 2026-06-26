@@ -1,0 +1,33 @@
+<div
+  class="modal-backdrop"
+  *ngIf="open"
+  (click)="onBackdropClick($event)"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="title"
+>
+  <div class="modal-card" role="document">
+    <!-- HEADER -->
+    <header class="modal-header">
+      <h2 class="modal-title">{{ title }}</h2>
+      <button
+        type="button"
+        class="modal-close"
+        aria-label="Close dialog"
+        (click)="close()"
+      >
+        &times;
+      </button>
+    </header>
+
+    <!-- BODY (projected content) -->
+    <section class="modal-body">
+      <ng-content></ng-content>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="modal-footer">
+      <ng-content select="[modal-footer]"></ng-content>
+    </footer>
+  </div>
+</div>

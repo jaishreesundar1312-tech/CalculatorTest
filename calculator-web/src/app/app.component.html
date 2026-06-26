@@ -1,0 +1,94 @@
+<main class="page">
+  <div class="hero">
+    <h1>Simple Calculator</h1>
+    <p class="subtitle">
+      Renaissance Global programming challenge — Angular front-end calling a
+      C#/.NET web service.
+    </p>
+    <button class="primary-btn" type="button" (click)="openModal()">
+      Open Calculator
+    </button>
+  </div>
+
+  <!-- Requirement 9: restyle the modal from the main page -->
+  <section class="theme-panel" aria-label="Modal appearance settings">
+    <h2>Customise the popup</h2>
+    <p class="hint">Changes apply live to the calculator modal.</p>
+
+    <div class="theme-grid">
+      <label>
+        Header colour
+        <input type="color" [(ngModel)]="theme.headerBg" />
+      </label>
+      <label>
+        Header text
+        <input type="color" [(ngModel)]="theme.headerText" />
+      </label>
+      <label>
+        Body colour
+        <input type="color" [(ngModel)]="theme.bodyBg" />
+      </label>
+      <label>
+        Body text
+        <input type="color" [(ngModel)]="theme.bodyText" />
+      </label>
+      <label>
+        Footer colour
+        <input type="color" [(ngModel)]="theme.footerBg" />
+      </label>
+      <label>
+        Corner radius: {{ theme.radius }}px
+        <input type="range" min="0" max="28" [(ngModel)]="theme.radius" />
+      </label>
+    </div>
+  </section>
+
+  <!-- The calculator lives entirely inside the modal -->
+  <div [ngStyle]="themeVars">
+    <app-modal
+      [open]="modalOpen"
+      title="Calculator"
+      (closed)="closeModal()"
+    >
+      <div class="calc-form">
+        <div class="field">
+          <label for="start">Start</label>
+          <input id="start" type="number" [(ngModel)]="start" />
+        </div>
+
+        <div class="field">
+          <label for="operation">Operation</label>
+          <select id="operation" [(ngModel)]="operation">
+            <option value="add">Add (+)</option>
+            <option value="subtract">Subtract (−)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="amount">Amount</label>
+          <input id="amount" type="number" [(ngModel)]="amount" />
+        </div>
+
+        <div class="result" *ngIf="result !== null">
+          Result: <strong>{{ result }}</strong>
+        </div>
+        <div class="error" *ngIf="error">{{ error }}</div>
+      </div>
+
+      <!-- Footer content projected into the modal footer -->
+      <ng-container modal-footer>
+        <button class="ghost-btn" type="button" (click)="closeModal()">
+          Close
+        </button>
+        <button
+          class="primary-btn"
+          type="button"
+          (click)="calculate()"
+          [disabled]="loading"
+        >
+          {{ loading ? 'Calculating…' : 'Calculate' }}
+        </button>
+      </ng-container>
+    </app-modal>
+  </div>
+</main>
