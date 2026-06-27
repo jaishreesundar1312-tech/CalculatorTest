@@ -28,12 +28,30 @@ CalculatorTest.sln
 
 ## Prerequisites
 
-- .NET 8 SDK (`dotnet --version` → 8.x)
-- Node.js 18+ and npm
-- Angular CLI is **not** required globally — the app uses the locally
-  installed CLI via `npm`.
+- **.NET 8 SDK** (`dotnet --version` → 8.x) — required
+- **Node.js 18+ and npm** (for the Angular front-end)
+- One of the following to work with the .NET solution:
+  - **Visual Studio 2022** (17.8 or later) on Windows, **or**
+  - the **`dotnet` CLI** (cross-platform — macOS, Linux, Windows)
+- Angular CLI is **not** required globally — the front-end uses the
+  locally installed CLI via `npm`.
+
+> The .NET solution and the Angular app run independently. The Angular app
+> is **not** part of the `.sln`; it is served separately via npm (this is
+> standard for Angular and applies on every platform, including Windows).
 
 ## 1. Run the .NET solution
+
+### Option A — Visual Studio 2022 (Windows)
+
+1. Double-click **`CalculatorTest.sln`** to open it in Visual Studio.
+2. **Build** the solution (`Ctrl+Shift+B`).
+3. **Run the tests** via *Test Explorer* (requirement 4).
+4. Set **`Calculator.Api`** as the startup project and press **F5** —
+   Swagger UI opens automatically at <http://localhost:5000/swagger>
+   (requirement 5).
+
+### Option B — `dotnet` CLI (macOS / Linux / Windows)
 
 From the repository root:
 
